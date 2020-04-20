@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // function memo(func){
+        //     var cache = {};
+        //         return function(){
+        //             var key = JSON.stringify(arguments);
+        //             if (cache[key]){
+        //                 console.log(cache)
+        //                 return cache[key];
+        //             }
+        //             else{
+        //                 val = func.apply(null, arguments);
+        //                 cache[key] = val;
+        //                 return val; 
+        //             }
+        //         }
+        // }  
+        // var fib = memo(function(n, b) {
+        //     if (n < 2){
+        //         return 1;
+        //     }else{
+        //         //We'll console.log a loader every time we have to recurse
+        //         console.log("loading...");
+        //         return fib(n-2) + fib(n-1);
+        //     }
+        // });
+        // console.log(fib(10));
+
+        // const add = (n, b) => (n + b);
+        // add(9, 9);
+        // аналогичная функция с мемоизацией
+        const memoMultiplication = () => {
+            let cache = {};
+            return (n, b) => {
+                let res = n + b;
+                if (res in cache) {
+                    console.log('From cache');
+                    return cache[res];
+                }
+                else {
+                    console.log('Calculating result');
+                    let res = n + b;
+                    cache[res] = res;
+                    return res;
+                }
+            }
+        }
+        const newMem = memoMultiplication();
+        console.log(newMem(9,9)); // вычислено
+        console.log(newMem(9,9)); // взято из кэша
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
