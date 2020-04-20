@@ -5,25 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function sum(arr, result = 0) {
-            const arrs = [];
-            if(arr.find(Array)) {
-                console.log(Array)
-            }
-            var result = result;
-            arr.forEach(function (el) {
+        function sum(arr, level = 0) {
+            let result = 0;
+                arr.forEach(function (el) {
                 if(!(el instanceof Array)) {
                     result += el;
                 } else {
                     result += sum(el);
                 }
-            });
-            // for (let i = 0; i < arr.length; i++) {
-            //    console.log(arr.isArray());
-            // }
+                });
+                let i = 0;
+                while(arr.length){
+                    i++;
+                    arr = arr.reduce( (level, el) => {
+                        if(Array.isArray(el)) level.push(...el);
+                        return level;
+                }, []);
+            }
+            let ires = i-1;
             return result;
         }
-        const arr = [4,6, [5,9, 5]];
+        const arr = [1,3,[7,2, [3,4]]];
         const res = sum(arr);
         console.log(res);
     </script>
